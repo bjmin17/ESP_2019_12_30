@@ -1,0 +1,377 @@
+<%@page import="net.sf.json.JSONArray"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_header.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_nav.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_sideDistrict.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_allDisSeoulBoard.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_footer.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="p_sideDistrict.js"></script>
+    <script src="p_allDisSeoulBoard.js"></script>
+</head>
+
+<script>
+
+$(function(){
+
+
+	
+
+	jQuery('#selectBox').change(function(){
+
+		var pa_acode = jQuery('#selectBox option:selected').val();
+
+
+		jQuery.ajax({
+
+			
+
+			url:"${rootPath}/esp/area/areawritesearch",
+			data : {pa_acode : pa_acode},
+			dataType: "json",
+			success: function(data){
+
+				$('#resultTR*').remove();
+				$('#resultTD*').remove();
+		
+					for(var idx=0; idx<data.length;idx++){
+
+
+						
+
+						
+						
+						$('.policyTable').append("<tr id='resultTR'><td id='resultTD'>" + data[idx].pa_acode+"</td><td id='resultTD'>" + data[idx].pa_title+"</td></tr>")
+						}
+					
+					//$('.newWriteButton').value = data[0].pa_acode
+					
+					$('button[class=newWriteButton]').attr('value', data[0].pa_acode)
+					
+				
+
+					//$.each(JSON.parse(areaJsonArray), function(areaJsonArray){
+
+
+						//	$('.policyTable').append("<tr><td>" + this["pa_acode"]+"</td><td>"+
+						//	this.pa_seq+"</td></tr>")
+
+						
+						
+					//	})
+					
+					
+				},
+			error: function(request,status,error,pa_acode){
+				 alert('code:'+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+
+				alert('통신 에러')
+				}
+			
+			})
+		
+
+		
+		})
+
+
+
+		
+		$('.newWriteButton').click(function(){
+
+			if(this.value == null || this.value == ""){
+					alert('정책 등록할 지역을 선택해주세요')
+					return false;
+				}
+
+
+			var pa_acode = jQuery('.newWriteButton').val();
+
+			jQuery.ajax({
+
+
+				//alert(pa_acode)
+
+				url:"${rootPath}/esp/area/areawritecodemax",		//코드 전송하여 맥스값 뽑아서 리턴
+				data : {pa_acode : pa_acode},
+				dataType: "text",
+				success:function(pa_acode){
+					$('input[class=pa_acode]').attr('value', pa_acode)
+					},
+				error:function(){
+						alert('통신 에러')
+					}	
+				
+				})
+			
+			
+			})
+
+
+
+		$('.submitButton').click(function(){
+
+			var pa_acode = document.getElementById('pa_acode').value
+			var pa_title = document.getElementById('pa_title').value
+			var pa_btarget = document.getElementById('pa_btarget').value.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+			pa_btarget = encodeURI(decodeURI(pa_btarget));
+			var pa_binfo = document.getElementById('pa_binfo').value.replace(/(?:\r\n|\r|\n)/g, '<br/>') //textarea의 줄바꿈 <br/>치환하여 저장
+			pa_binfo = encodeURI(decodeURI(pa_binfo));//크롬 화이트스페이스 blocking문제로 인한 디인코드
+
+			var pa_bpurpose = document.getElementById('pa_bpurpose').value.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+			pa_bpurpose = encodeURI(decodeURI(pa_bpurpose));
+			var pa_parti = document.getElementById('pa_parti').value.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+			pa_parti = encodeURI(decodeURI(pa_parti));
+			var pa_contact = document.getElementById('pa_contact').value.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+			pa_contact = encodeURI(decodeURI(pa_contact));
+			if(pa_acode == null || pa_title == null || pa_btarget == null || pa_binfo == null ||
+					pa_acode == "" || pa_title == ""  || pa_btarget == ""  || pa_binfo == "" ){
+					
+					alert('필수 입력값을 확인 후 다시 등록하세요')
+					return false;
+				}else{
+
+					document.location.href="${rootPath}/esp/area/areapolinput?pa_acode="+pa_acode+"&pa_title="+pa_title+
+					"&pa_btarget="+pa_btarget+"&pa_binfo="+pa_binfo+"&pa_bpurpose="+pa_bpurpose+"&pa_parti="+pa_parti+"&pa_contact="+pa_contact
+					
+
+					}
+			})
+			
+			
+			
+
+
+			function enterKey(){
+		
+		
+		 if(this.value.keyCode == 13){
+		
+			 
+			alert('엔터1')
+		
+		}
+
+
+
+			$('input').keydown(function(){
+				
+				 if(this.value.keyCode == 13){
+						
+					 
+						alert('엔터1')
+					
+					}
+				
+				})
+		
+	}
+
+			
+})
+
+	
+</script>
+
+
+<style>
+
+#writeForm{
+	
+
+    margin-left: 25%;
+    margin-top: 3%;
+}
+
+.policyTable{
+
+	width:100%;
+	border:1;
+	
+}
+
+#resultTR{
+
+	cursor: pointer;
+}
+
+.Button3{
+	margin-top: 5%;
+}
+
+textarea{
+	
+	
+}
+
+.textAreaP{
+	
+}
+
+</style>
+
+
+
+
+
+<body>
+        
+
+
+
+
+
+
+
+<div class="content_title">
+
+        <a>정책 관리</a>
+
+    </div>
+	
+	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+
+	
+	
+	
+	<form id="writeForm" onsubmit="return false">
+	
+	지역선택:
+    <select id="selectBox">
+    	<option value="">---------</option>
+    	<option value="ASE">서울특별시</option>
+    	<option value="AIC">인천광역시</option>
+    	<option value="ABU">부산광역시</option>
+    	<option value="ADJ">대전광역시</option>
+    	<option value="AGJ">광주광역시</option>
+    	<option value="AUS">울산광역시</option>
+    	<option value="ADG">대구광역시</option>
+    	<option value="AGG">경기도</option>
+    	<option value="AGW">강원도</option>
+    	<option value="ACN">충청북도</option>
+    	<option value="ACS">충청남도</option>
+    	<option value="AJN">전라북도</option>
+    	<option value="AJS">전라남도</option>
+    	<option value="AGN">경상북도</option>
+    	<option value="AGS">경상남도</option>
+    	<option value="AJJ">제주도</option>
+    </select>
+    
+    <br/>
+    <br/>
+    <br/>
+    
+   
+    
+   
+    
+  
+    
+    
+     <div style="width:50%; height:200px; overflow:auto;">
+    	
+    	<table class="policyTable">
+    	
+    	<tr>
+    	
+    	<th width="20%">CODE</th>
+    	<th width="70%">TITLE</th>
+    	</tr>
+    	
+    	
+    	
+    		
+    		
+    	
+    		
+    			<c:forEach items="${data}" var="list">
+    				<tr>
+    				<td>${list.code}</td>
+    				<td></td>
+    				<td></td>
+    				</tr>
+    			</c:forEach>
+    		
+    		
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	</table>
+    
+    </div>
+    
+    <br/>
+    <br/>
+    
+    <div class="areaForm">
+    
+     <button class="newWriteButton" type="button">새로등록</button>
+     <br/>
+    <br/>
+    
+
+    <br/>
+    <p>CODE<input id="pa_acode" class="pa_acode" placeholder="code" readonly="readonly" onkeypress="enterKey()"> 
+    
+     <br/> <br/> <br/>
+    
+    <p>정책명(필수)<input id="pa_title" class="pa_title"   maxlength="125" placeholder="최대 125자" onkeypress="enterKey()"><br/> <br/>
+    
+    
+    <p class="textAreaP">사업소개  <br/> <textarea id="pa_bpurpose" class="pa_bpurpose"  maxlength="1000" placeholder="최대 1000자" rows="10" cols="50"></textarea>
+    <br/> <br/>
+    <p class="textAreaP">지원대상(필수) <br/><textarea id="pa_btarget" class="pa_btarget"   maxlength="1000" placeholder="최대 1000자" rows="10" cols="50" wrap="hard"></textarea>
+    <br/> <br/>
+    <p class="textAreaP">지원내용(필수) <br/><textarea id="pa_binfo" class="pa_binfo"   maxlength="1000" placeholder="최대 1000자" rows="10" cols="50"></textarea>
+    <br/> <br/>
+    <p class="textAreaP">참여방법 <br/><textarea id="pa_parti" class="pa_parti"   maxlength="500" placeholder="최대 500자" rows="10" cols="50"></textarea>
+    <br/> <br/>
+    <p class="textAreaP">문의처 <br/><textarea id="pa_contact" class="pa_contact"   maxlength="500" placeholder="최대 500자" rows="10" cols="50"></textarea>
+    <br/> <br/>
+    </div>
+    
+    
+    
+    
+    
+    <div class="Button3">
+	<p><button class="submitButton" type="button">등록</button>
+	<button style="margin-left:2%;">삭제</button>
+	</div>
+	
+	
+	
+	
+	
+	
+
+	</form>
+	
+	
+
+
+</body>
+</html>

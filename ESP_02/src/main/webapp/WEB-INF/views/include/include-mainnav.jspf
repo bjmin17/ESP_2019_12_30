@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet"
+	href="${rootPath}/css/mainnav.css?ver=20191121001" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<nav>	
+	<ul id="main-menu">
+		<li class="menu1"><a href="${rootPath}/intro">사이트소개</a></li>
+		<div class="dropdown">
+            <li class="menu2"><a href="${rootPath}/esp/object">대상별정책</a></li>
+              <div class="dropdown-content">
+   				<a href="${rootPath}/esp/object" class="menu_youth">청년</a>
+				<a href="${rootPath}/esp/object/fmmain" class="menu_female">여성</a>
+				<a href="${rootPath}/esp/object/mdmain" class="menu_middleage">중장년</a>
+				<a href="${rootPath}/esp/object/damain" class="menu_disabled">장애인</a>
+				<a href="${rootPath}/esp/object/frmain" class="menu_foreign">외국인</a>
+              </div>
+              
+        </div>
+        <div class="dropdown">
+            <li class="menu3"><a href="${rootPath}/esp/area/seoul">지역별정책</a></li>
+              <div class="dropdown-content">
+                  <a href="${rootPath}/esp/area/seoul?pa_acode=ASE">광역시별</a>
+                  <a href="${rootPath}/esp/area/gyeonggi?pa_acode=AGG">도별</a>	
+              </div>
+        </div>
+		<li class="menu4"><a href="${rootPath}/news/nlist?searchField=&search=">소식</a></li>
+		<li class="menu5"><a href="${rootPath}/reference/rlist?searchField=&search=">정책자료실</a></li>
+		
+		<c:if test="${userDTO == null || userDTO.u_id == null}">
+			<li class="login"><a href="${rootPath}/member/login">로그인</a></li>
+			<li class="join"><a href="${rootPath}/user/personal_info_agree">회원가입</a></li>
+		</c:if>
+		
+		<c:if test="${userDTO != null && userDTO.u_id != null}">
+			<li class="login"><a href="${rootPath}/member/logout">로그아웃</a>
+			<li class="join"><a href="${rootPath}/user/mypage">${userDTO.u_id}</a>
+		</c:if>
+	</ul>
+</nav>	

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="com.biz.esp.persistence.AreaDao">
+  
+  <select id="selectMaxCode" resultType="String">
+  	SELECT MAX(PA_ACODE) FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%'
+  </select>
+  
+  <select id="selectSeoulListCnt" resultType="int">
+  
+  	SELECT COUNT(*) FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || 'ASE' || '%'
+  
+  </select>
+  
+  <select id="selectAreaListCnt" resultType="int">
+  
+  	SELECT COUNT(*) FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%'
+  
+  </select>
+  
+  
+  <select id="selectAreaSearchListCnt" resultType="int">
+  
+  	SELECT COUNT(*) FROM (SELECT * FROM tbl_policyarea WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%') WHERE PA_TITLE LIKE '%' || upper(#{searchVal}) || '%'
+  	OR PA_BPURPOSE LIKE '%' || upper(#{searchVal}) || '%'
+  
+  </select>
+  
+  
+  <!-- 
+  <select id="selectareaSearchListCnt" resultType="int">
+  
+  	SELECT COUNT(*) FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%'
+  	OP PA_ACODE LIKE '%' || #{pa_acode} || '%'
+  
+  </select>
+   -->
+  
+  
+  
+  
+  <select id="selectSeoulContent" resultType="AreaDTO">
+  
+ SELECT * FROM (
+    SELECT p.*, ROW_NUMBER() OVER(ORDER BY PA_ACODE DESC) AS RNUM
+    FROM TBL_POLICYAREA p WHERE PA_ACODE LIKE '%' || 'ASE' || '%'
+)
+WHERE RNUM BETWEEN #{startIndex} AND #{startIndex}+9
+  
+ 
+  
+  <!-- 	SELECT * FROM TBL_POLICYAREA   WHERE PA_ACODE LIKE '%' || 'ASE' || '%' 
+  	
+    AND  ROWNUM BETWEEN #{startIndex} AND #{startIndex}+9 -->
+  
+  
+  
+  <!-- SELECT ROW_NUMBER() OVER(ORDER BY ROWNUM DESC), pa_acode  FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || 'ASE' || '%'; -->
+  </select>
+  
+  
+   <select id="selectAreaContent" resultType="AreaDTO">
+  
+ SELECT * FROM (
+    SELECT p.*, ROW_NUMBER() OVER(ORDER BY PA_ACODE DESC) AS RNUM
+    FROM TBL_POLICYAREA p WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%'
+)
+WHERE RNUM BETWEEN #{startIndex} AND #{startIndex}+9
+  
+ 
+ 
+  </select>
+  
+  
+  <select id="selectAreaSearchContent" resultType="AreaDTO">
+  
+  SELECT * FROM (
+    SELECT p.*, ROW_NUMBER() OVER(ORDER BY PA_ACODE DESC) AS RNUM
+    FROM TBL_POLICYAREA p WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%' AND PA_TITLE LIKE '%' || upper(#{searchVal}) || '%' OR PA_ACODE LIKE '%' || #{pa_acode} || '%' AND PA_BPURPOSE LIKE '%' || upper(#{searchVal}) || '%'
+)
+WHERE RNUM BETWEEN #{startIndex} AND #{startIndex}+9
+  	
+  </select>
+  
+  
+  <select id="selectAreaView" resultType="AreaDTO">
+  	SELECT * FROM TBL_POLICYAREA WHERE PA_ACODE = #{pa_acode}
+  </select>
+  
+  <select id="selectAllByCode" resultType="AreaDTO">
+  	SELECT * FROM TBL_POLICYAREA WHERE PA_ACODE LIKE '%' || #{pa_acode} || '%' ORDER BY PA_ACODE DESC
+  </select>
+  
+  
+  
+  
+  
+  <insert id="insert" parameterType="AreaDTO">
+  	INSERT INTO TBL_POLICYAREA(PA_SEQ, PA_ACODE, PA_TITLE, PA_BPURPOSE, PA_BTARGET, PA_BINFO, PA_PARTI, PA_CONTACT)
+  	 VALUES(#{pa_seq},
+  	 #{pa_acode, jdbcType=VARCHAR}, 
+  	 #{pa_title, jdbcType=VARCHAR}, 
+  	 #{pa_bpurpose, jdbcType=VARCHAR}, 
+  	 #{pa_btarget, jdbcType=VARCHAR}, 
+  	 #{pa_binfo, jdbcType=VARCHAR}, 
+  	 #{pa_parti, jdbcType=VARCHAR}, 
+  	 #{pa_contact, jdbcType=VARCHAR})
+  </insert>
+  
+  
+  </mapper>

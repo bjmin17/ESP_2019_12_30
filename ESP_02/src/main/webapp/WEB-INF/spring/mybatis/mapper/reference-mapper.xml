@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.esp.persistence.ReferenceDao">
+	<select id="refTotalCount" resultType="Long">
+		SELECT COUNT(*) FROM tbl_policydata
+	</select>
+	<select id="selectAll" resultType="referenceDTO" parameterType="map">
+		<![CDATA[
+ 		SELECT * FROM
+		    (
+		        SELECT
+		            A.*,
+		            ROWNUM AS RNUM
+		        FROM
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    tbl_policydata
+		                ORDER BY
+		                    d_seq DESC
+		            ) A
+		    )
+		WHERE
+		    RNUM > (#{now} -1) *10 AND RNUM <= #{now} * 10
+	]]>
+	</select>
+
+	<select id="findMaxDseq" resultType="Integer">
+		SELECT max(d_seq) FROM tbl_policydata
+	</select>
+	<select id="selectFiveList" resultType="referenceDTO">
+		SELECT * FROM tbl_policydata ORDER BY d_seq DESC
+	</select>
+
+	<select id="findById" resultType="referenceDTO">
+		SELECT * FROM tbl_policydata WHERE d_seq = #{d_seq} ORDER BY d_seq DESC
+	</select>
+
+	<select id="findByAll" resultType="referenceDTO">
+		SELECT * FROM tbl_policydata 
+		WHERE d_title LIKE '%' || #{d_title} || '%' OR d_content LIKE '%' || #{d_content} || '%' ORDER BY d_seq DESC
+	</select>
+	
+	<select id="findByTitle" resultType="referenceDTO">
+		SELECT * FROM tbl_policydata 
+		WHERE d_title LIKE '%' || #{d_title} || '%' ORDER BY d_seq DESC
+	</select>
+	
+	<select id="findByContent" resultType="referenceDTO">
+		SELECT * FROM tbl_policydata 
+		WHERE d_content LIKE '%' || #{d_content} || '%' ORDER BY d_seq DESC
+	</select>
+
+
+
+	<insert id="insert" parameterType="referenceDTO">
+		INSERT INTO tbl_policydata(
+						D_SEQ,
+						D_TITLE,
+						D_CONTENT,
+						D_WRITER,
+						D_DATE,
+						D_FILE
+		) VALUES (
+						#{d_seq,jdbcType=VARCHAR},
+						#{d_title,jdbcType=VARCHAR},
+						#{d_content,jdbcType=VARCHAR},
+						#{d_writer,jdbcType=VARCHAR},
+						#{d_date,jdbcType=VARCHAR},
+						#{d_file,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="referenceDTO">
+		UPDATE tbl_policydata SET
+
+				D_TITLE = #{d_title,jdbcType=VARCHAR},
+				D_CONTENT = #{d_content,jdbcType=VARCHAR},
+				D_WRITER = #{d_writer,jdbcType=VARCHAR},
+				D_DATE = #{d_date,jdbcType=VARCHAR},
+				D_FILE = #{d_file,jdbcType=VARCHAR}
+
+		WHERE D_SEQ = #{d_seq,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM tbl_policydata
+		WHERE d_seq = #{d_seq}
+	</delete>
+
+
+
+
+</mapper> 

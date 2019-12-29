@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.side_section{
+    display:flex;
+}
+section.side_section{
+    align-self:right;
+}
+.sidenav{
+    display:flex;
+    background-color: none;
+    border-width:0 5px 0 0;
+    border-left:5px solid gray;
+    border-right:5px solid gray;
+    margin-left: 10px;
+    padding-top:30px;
+    padding-bottom:20%;
+    font-size:30px;
+    width:250px;
+    
+}
+.sidenav li{
+    padding:8px 8px 8px 32px;
+    list-style:none;
+    border-bottom:1px solid gray;
+    
+}
+.sidenav a{
+    padding-left:30px;
+    text-decoration:none;
+    color:black;
+    display:block;
+    
+}
+.sidenav a:hover{
+    background-color:gray;
+    color:blue;
+}

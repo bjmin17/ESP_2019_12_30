@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>취업지원정보 - 지역별 정책</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_header.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_nav.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_sideSocial.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='${rootPath}/css/center/include-p_allAreaContent-Post.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_footer.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='${rootPath}/css/p_returnTopMenu.css'>
+    <script src='main.js'></script>
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='${rootPath}/js/p_returnTopMenu.js'></script>
+    <script src="p_sideDistrict.js"></script>
+    
+    
+    
+    <style>
+    	
+    	p{
+    		white-space: pre-line;
+    	}
+    	
+    	
+    
+    </style>
+    
+    
+    
+    
+</head>
+<body>
+
+        <div class="return-top">
+                <a href="#">TOP</a>
+                </div>
+
+
+
+        
+        
+        
+        
+
+
+
+
+
+
+            <div class="content_title">
+
+            <!--     <a>청년 추가고용 장려금 지원사업</a> -->
+            <a>${AREADTO.pa_title}</a>
+        
+            </div>
+
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            
+            <div class="content">
+
+                <ul class="contentUL">
+
+                    <li><a>●사업소개</a></li>
+                    <p>${AREADTO.pa_bpurpose}
+                   
+                    
+                    <li><a>●지원대상</a></li>
+                    <p>${AREADTO.pa_btarget}
+                    
+                    
+                    <li><a>●지원내용</a></li>
+                    <p>${AREADTO.pa_binfo}
+                    
+                    
+                    <li><a>●참여방법</a></li>
+                   	<p>${AREADTO.pa_parti}
+                   	
+                   	
+                    <li><a>●문의처</a></li>
+                    <p>${AREADTO.pa_contact}
+
+
+                </ul>
+
+
+            </div>
+
+
+
+
+
+               
+</body>
+</html>

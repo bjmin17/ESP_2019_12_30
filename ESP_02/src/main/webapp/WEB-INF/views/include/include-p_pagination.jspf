@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+
+<style>
+	.paginationDiv{
+		float: left;
+    margin-top: 1%;
+    text-align: center;
+    margin-left: 23%;
+	}
+</style>
+</head>
+<body>
+
+
+
+<div class="paginationDiv">
+
+
+	<c:if test="${PAGINATIONDTO.curRange ne 1}">
+		<a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=1">처음</a>
+	</c:if>
+	
+	
+	<c:if test="${PAGINATIONDTO.curPage ne 1}">
+		<a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=${PAGINATIONDTO.prevPage}">[이전]</a>
+	</c:if>
+	
+	<c:forEach var="pageNum" begin="${PAGINATIONDTO.startPage}" end="${PAGINATIONDTO.endPage}">
+		<c:choose>
+		
+			<c:when test="${pageNum eq PAGINATIONDTO.curPage}">
+				<span style="font-weight:bold;"><a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=${pageNum}">${pageNum}</a></span>
+			</c:when>
+			
+			<c:otherwise>
+				<a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=${pageNum}">${pageNum}</a>
+			</c:otherwise>
+			
+		</c:choose>
+	</c:forEach>
+	
+	
+	
+	
+	<c:if test="${PAGINATIONDTO.curPage ne PAGINATIONDTO.pageCnt && PAGINATIONDTO.pageCnt > 0}">
+		<a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=${PAGINATIONDTO.nextPage}">[다음]</a>
+	</c:if>
+	
+	<c:if test="${PAGINATIONDTO.curRange ne PAGINATIONDTO.rangeCnt && PAGINATIONDTO.rangeCnt > 0}">
+		<a href="${rootPath}/esp/area/searchArea?searchVal=${SEARCHVAL}&pa_acode=${PA_ACODE}&curPage=${PAGINATIONDTO.pageCnt}">[끝]</a>
+	</c:if>
+	
+	
+	<br/>
+	<br/>
+	
+	총 게시글:${PAGINATIONDTO.listCnt} / 현재 페이지:${PAGINATIONDTO.curPage} / 현재 블럭: ${PAGINATIONDTO.curRange} /
+	총 블럭수:${PAGINATIONDTO.rangeCnt} 
+	
+</div>
+
+
+<div>
+	
+</div>
+
+</body>
+</html>

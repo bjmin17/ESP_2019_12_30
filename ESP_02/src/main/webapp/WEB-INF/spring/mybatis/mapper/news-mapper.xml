@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.esp.persistence.NewsDao">
+	<select id="newsTotalCount" resultType="Long">
+		SELECT COUNT(*) FROM tbl_news
+	</select>
+	
+	<select id="selectAll" resultType="newsDTO" parameterType="map">
+		<![CDATA[
+	 		SELECT * FROM
+			    (
+			        SELECT
+			            A.*,
+			            ROWNUM AS RNUM
+			        FROM
+			            (
+			                SELECT
+			                    *
+			                FROM
+			                    tbl_news
+			                ORDER BY
+			                    n_seq DESC
+			
+			            ) A
+			    )
+			WHERE
+			    RNUM > (#{now} -1) *10 AND RNUM <= #{now} * 10 
+		]]>
+	</select>
+	
+	<select id="selectFiveList" resultType="newsDTO">
+		SELECT * FROM tbl_news ORDER BY n_seq DESC
+	</select>
+	
+	<select id="findMaxNseq" resultType="Integer">
+		SELECT max(n_seq) FROM tbl_news
+	</select>
+	
+	<select id="findById" resultType="newsDTO">
+		SELECT * FROM tbl_news WHERE n_seq = #{n_seq} ORDER BY n_seq DESC
+	</select>
+
+	<select id="findByAll" resultType="newsDTO">
+		SELECT * FROM tbl_news 
+		WHERE n_title LIKE '%' || #{n_title} || '%' OR n_content LIKE '%' || #{n_content} || '%' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="findByTitle" resultType="newsDTO">
+		SELECT * FROM tbl_news 
+		WHERE n_title LIKE '%' || #{n_title} || '%' ORDER BY n_seq DESC
+	</select>
+	
+	<select id="findByContent" resultType="newsDTO">
+		SELECT * FROM tbl_news 
+		WHERE n_content LIKE '%' || #{n_content} || '%' ORDER BY n_seq DESC
+	</select>
+
+
+
+	<insert id="insert" parameterType="newsDTO">
+		INSERT INTO tbl_news(
+						N_SEQ,
+						N_TITLE,
+						N_CONTENT,
+						N_WRITER,
+						N_DATE,
+						N_FILE
+		) VALUES (
+						#{n_seq,jdbcType=VARCHAR},
+						#{n_title,jdbcType=VARCHAR},
+						#{n_content,jdbcType=VARCHAR},
+						#{n_writer,jdbcType=VARCHAR},
+						#{n_date,jdbcType=VARCHAR},
+						#{n_file,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="newsDTO">
+		UPDATE tbl_news SET
+
+				N_TITLE = #{n_title,jdbcType=VARCHAR},
+				N_CONTENT = #{n_content,jdbcType=VARCHAR},
+				N_WRITER = #{n_writer,jdbcType=VARCHAR},
+				N_DATE = #{n_date,jdbcType=VARCHAR},
+				N_FILE = #{n_file,jdbcType=VARCHAR}
+
+		WHERE N_SEQ = #{n_seq,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM tbl_news
+		WHERE n_seq = #{n_seq}
+	</delete>
+
+
+
+</mapper>

@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+table{
+    width:70%;
+    margin:20px auto;
+    border-bottom: 1px solid #ccc;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    
+    white-space: nowrap;
+    font-size: 14px;
+    text-align: center;
+}
+/* 소식, 정책자료실 표 */
+.detail_table th{
+    font-weight: bold;
+    text-align: center;
+    background-color: #c4c2c2;
+    color:#3b3b3b;
+    padding:10px 11px 11px 11px;
+    border-bottom: 1px solid #ccc;
+}
+.detail_table td{
+    padding:12px 10px;
+    border-bottom: 1px solid #ccc;
+    height: 23px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
+}
+.detail_table a{
+	text-decoration: none;
+}
+.detail_table td:nth-child(2){
+    text-align: left;
+}
+.detail_table td:nth-child(2)::hover{
+	cursor: pointer;
+}
+
+#th1{
+    width:30px;
+}
+#th2{
+    width:270px;
+}
+#th3, #th4, #th5, #th6{
+    width:60px;
+}
+
+
+/* 소식 세부사항 페이지 표 */
+.news_detail table th{
+    font-weight: bold;
+    text-align: center;
+    background-color: #c4c2c2;
+    color:#3b3b3b;
+    padding:12px 7px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+.news_detail table td{
+    padding:0;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* 의견 페이지 표 */
+.opinion_table th{
+    font-weight: bold;
+    text-align: center;
+    background-color: #c4c2c2;
+    color:#3b3b3b;
+    padding:10px 11px 11px 11px;
+    border-bottom: 1px solid #ccc;
+    /* height:50px; */
+}
+.opinion_table td{
+    padding:0;
+    border-bottom: 1px solid #ccc;
+}

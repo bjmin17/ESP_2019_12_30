@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.esp.persistence.OpinionDao">
+	<insert id="insert" parameterType="opinionDTO">
+		INSERT INTO tbl_opinion(
+						O_SEQ,
+						O_TITLE,
+						O_EMAIL,
+						O_CONTENT,
+						O_DATE,
+						O_FILE,
+						O_DIVISION
+		) VALUES (
+						SEQ_O.NEXTVAL,
+						#{o_title,jdbcType=VARCHAR},
+						#{o_email,jdbcType=VARCHAR},
+						#{o_content,jdbcType=VARCHAR},
+						#{o_date,jdbcType=VARCHAR},
+						#{o_file,jdbcType=VARCHAR},
+						#{o_division,jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper> 

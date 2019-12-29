@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_sideSocial.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    
+    
+
+        <div class="columnSide">
+
+                
+
+                <a class="socialTitle">-대상별 정책-</a>
+
+
+                
+                <a href="${rootPath}/esp/object" class="columnSideB" id="sideYoung">-청년</a>
+                <a href="${rootPath}/esp/object/fmmain" class="columnSideB" id="sideFemale">-여성</a>
+                <a href="${rootPath}/esp/object/mdmain" class="columnSideB" id="sideMiddle">-중장년</a>
+                <a href="${rootPath}/esp/object/damain" class="columnSideB" id="sideDisable">-장애인</a>
+                <a href="${rootPath}/esp/object/frmain" class="columnSideB" id="sideForeign">-외국인</a>
+                
+                
+                
+        </div>
+                
+
+
+</body>
+</html>

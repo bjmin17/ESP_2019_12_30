@@ -1,0 +1,78 @@
+.content_title{
+
+    border-bottom: 1px solid gray;
+    float: left;
+    width: 60%;
+    margin-top: 5%;
+    margin-left: 8%;
+    padding-bottom: 5px;
+
+} 
+
+
+.content_title a{
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+table{
+    float: left;
+    text-align: center;
+    width: 60%;
+    margin-top: 5%;
+    margin-left: 8%;
+    border-collapse: collapse;
+    
+
+}
+
+
+table td{
+    padding: 15px;
+    
+    
+}
+
+table td:hover{
+    background-color: rgb(226, 226, 226);
+}
+
+table a{
+    display: block;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+
+
+
+.contentUL{
+
+    list-style: none;
+    float: left;
+
+
+
+}
+
+
+.contentUL li{
+
+    
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
+.content{
+    float: left;
+    width: 60%;
+    background-color: rgb(240, 240, 240);
+    margin-left: 8%;
+}
+

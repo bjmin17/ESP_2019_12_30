@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="com.biz.esp.persistence.TargetDao">
+  
+  
+  
+  <select id="selectYoungAll" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE LIKE '%' || 'TY' || '%'
+  
+  </select>
+  
+  <select id="selectWomenAll" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE LIKE '%' || 'TW' || '%'
+  
+  </select>
+  
+  <select id="selectMiddleAll" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE LIKE '%' || 'TM' || '%'
+  
+  </select>
+  
+  <select id="selectDisableAll" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE LIKE '%' || 'TD' || '%'
+  
+  </select>
+  
+  <select id="selectForeignAll" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE LIKE '%' || 'TF' || '%'
+  
+  </select>
+  
+  
+  <select id="selectContentByTCode" resultType="TargetVO">
+  
+  	SELECT * FROM TBL_POLICYTARGET WHERE PT_TCODE = #{pt_tcode}
+  
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>

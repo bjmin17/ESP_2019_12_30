@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${rootPath}/css/footer.css?ver=20191121001"
+   type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<footer>
+   <ul>
+      <li class="infouse"><a href="${rootPath}/infouse">이용안내</a></li>
+      <li class="privacy"><a href="${rootPath}/privacy">개인정보처리방침</a></li>
+      <li class="opinion"><a href="${rootPath}/opinion">개선의견수렴</a></li>
+   </ul>
+   <div id="footer-bottom">
+   <p>Employment Support Policy<br/><br/>
+   광주광역시 북구 중흥1동 경양로 170 한국경영원 인재개발원 505</p>
+   
+   </div>
+   <ul>
+      <li>CopyRight &copy; bjmin17@naver.com doolybom1@google.com akakoko2@gmail.com</li>
+   </ul>
+</footer>

@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_header.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_nav.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_sideDistrict.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_allDisContent.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_footer.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="p_sideDistrict.js"></script>
+</head>
+<body>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content_title">
+
+        <a>지역별 정책 모음입니다</a>
+
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+
+    <div class="table_title">
+
+            <a>-현재 인기 정책-</a>
+
+    </div>
+
+
+
+    <table border="1" bordercolor="gray">
+
+            
+
+       
+
+        <tr>
+            <td><strong>부산광역시</strong><a>건강상담매니저</a></td>
+            <td><strong>인천광역시</strong><a>해외교류지원사업</a></td>
+            <td><strong>대구광역시</strong><a>창업코칭지원사업</a></td>
+        </tr>
+
+        <tr>
+            <td><strong>충청북도</strong><a>청년활력프로그램</a></td>
+            <td><strong>강원도</strong><a>청년일자리사업</a></td>
+            <td><strong>제주도</strong><a>취업상담원</a></td>
+        </tr>
+
+
+    </table>
+
+
+
+
+
+</body>
+</html>

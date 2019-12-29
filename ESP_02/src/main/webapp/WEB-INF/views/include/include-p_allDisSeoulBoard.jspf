@@ -1,0 +1,263 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_header.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_nav.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_sideDistrict.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_allDisSeoulBoard.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='p_footer.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="p_sideDistrict.js"></script>
+    <script src="p_allDisSeoulBoard.js"></script>
+</head>
+
+<script>
+function tdClick(pa_acode){
+	
+	document.location.href = "${rootPath}/esp/area/view?pa_acode="+pa_acode
+	
+}
+
+
+
+
+function enterKey(){
+	
+	
+	 if(event.keyCode == 13 && document.getElementById("searchVal").value.length >= 2){
+	
+		 
+	field_focus();
+	
+	}else if(event.keyCode == 13 && document.getElementById("searchVal").value.length < 2){
+		
+		alert("2글자 이상 입력하시오")
+		return false;
+	}
+	
+}
+
+function field_focus(){
+
+		
+    if(document.getElementById("searchVal").value.length < 2 ){
+        
+        alert("2글자 이상 입력하시오")
+        return false;
+        
+        
+        
+    }else{
+    	
+    	
+    	var searchVal =  document.getElementById("searchVal").value
+    //	var pa_acode = '<c:out value="${AREALIST[0].pa_acode}"/>'
+    	var pa_acode = '<c:out value="${PA_ACODE}"/>'
+    	document.location.href = "${rootPath}/esp/area/searchArea?searchVal="+ searchVal+
+    	"&pa_acode="+pa_acode
+    	
+    	event.preventDefault()
+    }
+	
+	return false;
+    
+}
+</script>
+
+
+<style>
+
+.contentTD:hover{
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+    
+}
+
+
+.searchValue{
+	float:left;
+	font-size: 15px;
+	margin-left: 14%;
+}
+
+.searchValue a{
+	font-weight: bold;
+}
+
+
+
+}
+.area-search{
+    
+    justify-content: space-between;
+    padding:10px;
+
+}
+.area-btn, .writeButton{
+    width:60px;
+    height: 40px;
+    font-weight: bold;
+    margin: 8px 5px;
+}
+.writeButton{
+	margin-right:4rem;
+}
+
+.searchVal{
+    width:50%;
+    height: 35px;
+    margin: 8px auto;
+    margin-right: 10px;
+}
+</style>
+
+
+
+
+
+<body>
+
+
+
+<div class="content_title">
+
+        <a>${disName} 정책 모음입니다</a>
+
+    </div>
+<div class="searchValForm" style="margin-left=5px;" >
+    
+    
+    
+    	<c:choose>
+			<c:when test="${not empty SEARCHVAL}">
+				<c:set var="SEARCHVAL" value="${SEARCHVAL}"/>
+				<p class="searchValue">입력된 검색어:<a>${SEARCHVAL}</a></p>
+			</c:when>
+		</c:choose>
+    
+    
+    <form onsubmit="return false;" method="post" class="area-search" style="display:flex; background-color: rgb(47,79,79); width:565px;">
+    
+    	
+        <input onkeypress="enterKey()" type="text" name="searchVal" placeholder="정책내용을 검색" value=""  class="searchVal" id="searchVal"/>
+        <button type="button" onclick="field_focus();" class="area-btn">검색</button>
+        <button type="button" class="writeButton" onclick="document.location.href='${rootPath}/esp/area/inputarea'">정책등록</button>
+    </form>
+</div>
+    <br/>
+    <br/>
+     <br/>
+    <br/>
+   
+  
+ 
+
+    <table>
+
+		 
+		 
+        <tr class="tableTop">
+            <td class="tableNumber">번호</td>
+            <td class="tablePTitle">정책명</td>
+          <!--   <td class="tableRange">운영기간</td>
+            <td class="tableView">조회수</td> -->
+        </tr>
+        
+     <c:choose>
+            
+            	<c:when test="${empty AREALIST}">
+            	<tr>
+            		<td><a>0</a></td>
+                    <td><a>게시글이 없습니다</a></td>
+                </tr>
+            	</c:when>
+            	
+            	
+            	
+            	
+            	<c:otherwise>
+            	
+            		<c:set var="listCnt" value="${PAGINATIONDTO.listCnt}"/>
+            		<%
+            			int listCnt = (int)pageContext.getAttribute("listCnt");
+            			pageContext.setAttribute("listCnt", listCnt);
+            		%>
+            	
+            	
+            	
+            		<c:set var="startIndex" value="${PAGINATIONDTO.startIndex}"/>
+            		<%
+            			int startIndex = (int)pageContext.getAttribute("startIndex");	// 1 페이지는 0부터 시작
+            			pageContext.setAttribute("startIndex", startIndex);
+            		%>
+            		
+            		
+            		
+            		
+            	
+            		<c:forEach items="${AREALIST}" var="ALIST">
+            	
+            			<tr class="contentTD" onclick="tdClick('${ALIST.pa_acode}')">
+                    		<td >${listCnt-startIndex}</td>
+                    		<td ><a>${ALIST.pa_title}</a></td>
+                		</tr>
+            		
+            		<%
+            		startIndex ++; 
+            		pageContext.setAttribute("startIndex", startIndex);
+            		%>
+            		
+            	
+            		</c:forEach>
+            	
+            	</c:otherwise>
+            </c:choose>
+        
+ 
+        
+	
+    </table>
+    
+    
+    
+    
+    
+    <br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
+	
+	
+	
+   	
+  
+
+	
+
+   
+    
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet"
+	href="${rootPath}/css/sidenav.css?ver=20191121001" type="text/css">
+<div class="sidenav">
+	<ul>
+		<li>대상별 정책</li>
+
+		<li><a href="C:\developer\htmlwork\취업지원정책/연습 대상2_청년.html"> - 청년</a></li>
+		<li><a href="C:\developer\htmlwork\취업지원정책/연습 대상2_여성.html"> - 여성</a></li>
+		<li><a href="C:\developer\htmlwork\취업지원정책/연습 대상2_중장년.html"> - 중장년</a></li>
+		<li><a href="C:\developer\htmlwork\취업지원정책/연습 대상2_장애인.html"> - 장애인</a></li>
+		<li><a href="C:\developer\htmlwork\취업지원정책/연습 대상2_외국인.html"> - 외국인</a></li>
+	</ul>
+</div>

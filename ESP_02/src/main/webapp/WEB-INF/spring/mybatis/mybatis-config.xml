@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.biz.esp.domain.ReferenceDTO" alias="referenceDTO"/>
+		<typeAlias type="com.biz.esp.domain.OpinionDTO" alias="opinionDTO"/>
+		<typeAlias type="com.biz.esp.domain.NewsDTO" alias="newsDTO"/>	
+		<typeAlias type="com.biz.esp.domain.UserDTO" alias="UserDTO"/>
+		<typeAlias type="com.biz.esp.domain.TargetVO"  alias="TargetVO"/>
+		<typeAlias type="com.biz.esp.domain.AreaDTO"  alias="AreaDTO"/>
+	</typeAliases>
+</configuration> 
